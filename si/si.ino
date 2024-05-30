@@ -31,7 +31,7 @@ LiquidCrystal_I2C lcd_1(0x27, 16, 2); // Inițializare LCD cu adresa I2C 0x27, 1
 
 Servo servo1, servo2; // Creare obiecte pentru servomotoare
 
-int nr_locuri = 5; // Variabilă pentru a urmări locurile de parcare disponibile
+int nr_locuri = 7; // Variabilă pentru a urmări locurile de parcare disponibile
 
 // Funcție pentru a verifica dacă valoarea distanței este într-un interval valid
 bool checkValue(long value) {
@@ -131,7 +131,7 @@ void bariera_intrare(long intrare1, long intrare2) {
 
 // Funcție pentru controlul barierei de ieșire
 void bariera_iesire(long iesire1, long iesire2) {
-  if (nr_locuri < 5) {  // Dacă parcarea nu este plină
+  if (nr_locuri < 7) {  // Dacă parcarea nu este plină
     if (iesire1 > MIN_DISTANCE && iesire1 <= MAX_DISTANCE) {
       Serial.println("Bariera ridicata pentru iesire!");
       servo2.write(90);  // Ridicare bariera
@@ -150,8 +150,7 @@ void bariera_iesire(long iesire1, long iesire2) {
 // Funcție pentru afișarea numărului de locuri de parcare disponibile pe LCD
 void print_locuri_libere(int nr_locuri) {
   lcd_1.clear();
-  lcd_1.setCursor(0, 0);
-  lcd_1.print("Bine ati venit!");
+  
   if (nr_locuri > 0) {
     lcd_1.setCursor(0, 1);
     lcd_1.print(nr_locuri);
